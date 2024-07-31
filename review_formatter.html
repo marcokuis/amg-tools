@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Angry Metal Guy Review Formatting Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #text,
+      #wp_title,
+      #metadata,
+      #tags {
+        font-family: monospace;
+        white-space: pre-wrap;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        overflow: auto;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      #text {
+        height: 200px;
+      }
+
+      #wordcount {
+        color: #bb0000;
+      }
+      #wordcount.green {
+        color: #00bb00;
+      }
+
+      #errorBox {
+        background-color: #bb0000;
+        color: white;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        font-size: x-large;
+      }
+
+      #inputForm {
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .input-column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      small {
+        font-style: italic;
+      }
+      @media (max-width: 60em) {
+        #inputForm {
+          display: flex;
+          flex-direction: column;
+          align-content: normal;
+          justify-content: normal;
+          flex-wrap: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h2>Input Form</h2>
+      <form id="inputForm">
+        <div class="input-column me-4">
+          <div class="form-group">
+            <label for="paragraph1">Paragraph 1</label>
+            <textarea class="form-control" id="paragraph1" name="paragraph1" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="paragraph2">Paragraph 2</label>
+            <textarea class="form-control" id="paragraph2" name="paragraph2" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="paragraph3">Paragraph 3</label>
+            <textarea class="form-control" id="paragraph3" name="paragraph3" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="paragraph4">Paragraph 4</label>
+            <textarea class="form-control" id="paragraph4" name="paragraph4" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="paragraph5">Paragraph 5</label>
+            <textarea class="form-control" id="paragraph5" name="paragraph5" rows="10"></textarea>
+          </div>
+          <h4 id="wordcount"></h4>
+        </div>
+
+        <div class="input-column">
+          <div class="form-group">
+            <label for="artist">Artist</label>
+            <input type="text" class="form-control" id="artist" name="artist" />
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" />
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" name="date" />
+          </div>
+          <div class="form-group">
+            <label for="label">Label</label>
+            <input type="text" class="form-control" id="label" name="label" />
+          </div>
+          <div class="form-group">
+            <label for="bcembed">Bandcamp embed code</label>
+            <textarea class="form-control" id="bcembed" name="bcembed" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="youtube">YouTube link</label>
+            <input type="text" class="form-control" id="youtube" name="youtube" />
+          </div>
+          <div class="form-group">
+            <label for="score">Score</label>
+            <select class="form-control" id="score" name="score">
+              <option value="5.0_Iconic">5.0 - Iconic</option>
+              <option value="4.5_Excellent">4.5 - Excellent</option>
+              <option value="4.0_Great">4.0 - Great</option>
+              <option value="3.5_Very Good">3.5 - Very Good</option>
+              <option value="3.0_Good">3.0 - Good</option>
+              <option selected value="2.5_Mixed">2.5 - Mixed</option>
+              <option value="2.0_Disappointing">2.0 - Disappointing</option>
+              <option value="1.5_Bad">1.5 - Bad</option>
+              <option value="1.0_Embarrassing">1.0 - Embarrassing</option>
+              <option value="0.5_Unlistenable">0.5 - Unlistenable</option>
+            </select>
+            <input type="radio" id="numericScore" name="scoreDisplay" value="numeric" checked />
+            <label for="numericScore">Display as number</label>
+            <input type="radio" id="textScore" name="scoreDisplay" value="text" />
+            <label for="textScore">Display as text</label>
+          </div>
+          <div class="form-group">
+            <label for="DR">DR</label>
+            <input type="text" class="form-control" id="DR" name="DR" />
+          </div>
+          <div class="form-group">
+            <label for="bitrate">Bitrate</label>
+            <select class="form-control" id="bitrate" name="bitrate">
+              <option value="PCM">PCM</option>
+              <option selected value="320 kb/s mp3">320 kb/s mp3</option>
+              <option value="256 kbps mp3">256 kbps mp3</option>
+              <option value="224 kbps mp3">224 kbps mp3</option>
+              <option value="192 kbps mp3">192 kbps mp3</option>
+              <option value="160 kbps mp3">160 kbps mp3</option>
+              <option value="128 kbps mp3">128 kbps mp3</option>
+              <option value="~260 kbps VBR mp3">~260 kbps VBR mp3</option>
+              <option value="~225 kbps VBR mp3">~225 kbps VBR mp3</option>
+              <option value="~190 kbps VBR mp3">~190 kbps VBR mp3</option>
+              <option value="~175 kbps VBR mp3">~175 kbps VBR mp3</option>
+              <option value="~165 kbps VBR mp3">~165 kbps VBR mp3</option>
+              <option value="">Other (set manually)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="labelsite">Label website</label>
+            <input type="text" class="form-control" id="labelsite" name="labelsite" />
+          </div>
+          <div class="form-group">
+            <label for="bandcamp">Bandcamp</label>
+            <input type="text" class="form-control" id="bandcamp" name="bandcamp" />
+          </div>
+          <div class="form-group">
+            <label for="website">Website</label>
+            <input type="text" class="form-control" id="website" name="website" />
+          </div>
+          <div class="form-group">
+            <label for="facebook">Facebook</label>
+            <input type="text" class="form-control" id="facebook" name="facebook" />
+          </div>
+          <div class="form-group">
+            <label for="country">Origin</label>
+            <input type="text" class="form-control" id="country" name="country" />
+            <small>e.g. 'British'</small>
+          </div>
+          <div class="form-group">
+            <label for="genres">Genres</label>
+            <input type="text" class="form-control" id="genres" name="genres" />
+            <small>Use commas to separate</small>
+          </div>
+          <div class="form-group">
+            <label for="bandTags">Band Tags</label>
+            <input type="text" class="form-control" id="bandTags" name="bandTags" />
+            <small>Use commas to separate</small>
+          </div>
+        </div>
+      </form>
+      <hr />
+      <h3>Output</h3>
+      <div id="errorBox"></div>
+      <h6>Text</h6>
+      <div id="text"></div>
+      <button class="btn btn-primary mt-1 mb-3" onclick="copyToClipboard('text')">Copy to Clipboard</button>
+
+      <h6>Title</h6>
+      <div id="wp_title"></div>
+      <button class="btn btn-primary mt-1 mb-3" onclick="copyToClipboard('wp_title')">Copy</button>
+
+      <h6>Metadata</h6>
+      <div id="metadata"></div>
+      <button class="btn btn-primary mt-1 mb-3" onclick="copyToClipboard('metadata')">Copy</button>
+
+      <h6>Tags</h6>
+      <div id="tags"></div>
+      <button class="btn btn-primary mt-1 mb-3" onclick="copyToClipboard('tags')">Copy</button>
+      <hr />
+      <button class="btn btn-danger mt-3 mb-3" onclick="clearForm()" id="clearFormButton">Clear Form</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.28.0/dist/date-fns.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      document.documentElement.setAttribute(
+        "data-bs-theme",
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      );
+
+      $(document).ready(function () {
+        loadFormData();
+        document.querySelectorAll("#inputForm input, #inputForm textarea, #inputForm select").forEach((input) => {
+          input.addEventListener("input", updateOutput);
+        });
+        updateOutput();
+      });
+
+      function getRawInputs() {
+        const form = document.getElementById("inputForm");
+        return Array.from(document.getElementById("inputForm").elements).reduce((acc, element) => {
+          if (element.id) {
+            if (element.type === "radio") {
+              acc[element.id] = element.checked;
+            } else {
+              acc[element.id] = element.value;
+            }
+          }
+          return acc;
+        }, {});
+      }
+
+      function updateOutput() {
+        const inputs = getRawInputs();
+        localStorage.setItem("amg-form", JSON.stringify(inputs));
+
+        inputValidate(inputs);
+
+        let article = `<p style="text-align: justify;">${inputs.paragraph1}</p>\n<p style="text-align: justify;">${inputs.paragraph2}</p>\n`;
+        if (inputs.bcembed) {
+          bcembed = (inputs.bcembed.slice(0, 8) + 'class="aligncenter" ' + inputs.bcembed.slice(8)).replace(
+            "width: 100%",
+            "width: 500px"
+          );
+          article += `${bcembed}\n`;
+        }
+        article += `<p style="text-align: justify;">${inputs.paragraph3}</p>\n<p style="text-align: justify;">${inputs.paragraph4}</p>\n<p style="text-align: justify;">${inputs.paragraph5}</p>\n`;
+        if (inputs.youtube) {
+          const ytcode = inputs.youtube.split("?v=")[1];
+          article += `<iframe class="aligncenter" src="https://www.youtube.com/embed/${ytcode}" width="500" height="285" frameborder="0" allowfullscreen="allowfullscreen"><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span></iframe>\n`;
+        }
+        article += "<hr />\n\n";
+        const score = $("#numericScore")[0].checked ? `${inputs.score.split("_")[0]}/5.0` : inputs.score.split("_")[1];
+        article += `<p style="text-align: center;"><strong>Rating:</strong> ${score}
+<strong>DR:</strong> ${inputs.DR} | <strong>Format Reviewed:</strong> ${inputs.bitrate}
+<strong>Label:</strong> <a href="${inputs.labelsite}" target="_blank" rel="noopener">${inputs.label}</a>\n`;
+        const websites = [];
+        if (inputs.bandcamp) {
+          websites.push(inputs.bandcamp);
+        }
+        if (inputs.website) {
+          websites.push(inputs.website);
+        }
+        if (inputs.facebook) {
+          websites.push(inputs.facebook);
+        }
+        const websites_string = websites
+          .map((site) => {
+            site_formatted = site.replace("https://", "").replace("http://", "").replace("www.", "");
+            if (site_formatted[site_formatted.length - 1] === "/") {
+              site_formatted = site_formatted.slice(0, -1);
+            }
+            return `<a href="http://${site_formatted}" target="_blank" rel="noopener">${site_formatted}</a>`;
+          })
+          .join(" | ");
+        article += `<strong>Websites:</strong> ${websites_string}\n`;
+        const date = formatDate(inputs.date);
+        article += `<strong>Releases Worldwide:</strong> ${date}</p>`;
+
+        if (inputs.artist) {
+          article = article.replaceAll(inputs.artist, `<strong>${inputs.artist}</strong>`);
+        }
+        if (inputs.title) {
+          article = article.replaceAll(inputs.title, `<em>${inputs.title}</em>`);
+        }
+        if (inputs.bandTags) {
+          inputs.bandTags.split(",").forEach((tag) => {
+            const trimmed = tag.trim();
+            if (trimmed) {
+              article = article.replaceAll(trimmed, `<strong>${trimmed}</strong>`);
+            }
+          });
+        }
+
+        const countThis = [
+          inputs.paragraph1,
+          inputs.paragraph2,
+          inputs.paragraph3,
+          inputs.paragraph4,
+          inputs.paragraph5,
+        ].join(" ");
+        const wordCount = countWordsIgnoringBrackets(countThis);
+
+        document.getElementById("text").textContent = article.trim();
+        document.getElementById("wp_title").textContent = `${inputs.artist} - ${inputs.title} Review`;
+        document.getElementById("metadata").textContent = `A review of ${inputs.title} by ${
+          inputs.artist
+        }, available ${date.slice(0, -6)} worldwide via ${inputs.label}.`;
+        document.getElementById("tags").textContent = [
+          "Review",
+          "Reviews",
+          inputs.score.split("_")[0],
+          inputs.label,
+          inputs.country + " Metal",
+          date.slice(-4),
+          date.slice(0, 3) + date.slice(-2),
+          inputs.artist,
+          inputs.title,
+          inputs.genres,
+          inputs.bandTags,
+        ].join(", ");
+
+        const counter = $("#wordcount")[0];
+        counter.textContent = `${wordCount} words`;
+        if (wordCount >= 600 && wordCount <= 750) {
+          $(counter).addClass("green");
+        } else {
+          $(counter).removeClass("green");
+        }
+      }
+
+      function inputValidate(inputs) {
+        let errorText = [];
+        if (inputs.bcembed && inputs.youtube) {
+          errorText.push("You have a bandcamp and a youtube embed, please choose one or the other.");
+        }
+        if (inputs.score[0] === "5") {
+          errorText.push("You have selected a 5.0. Those are very rare. Are you sure about this?");
+        }
+        if (errorText.length) {
+          $("#errorBox").show();
+          $("#errorBox").text(errorText.join("\n\n"));
+        } else {
+          $("#errorBox").hide();
+        }
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) {
+          return "";
+        }
+        const date = new Date(dateStr);
+
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+
+        const month = months[date.getMonth()];
+        const day = date.getDate();
+        const year = date.getFullYear();
+
+        // Function to determine the ordinal suffix of the day
+        function getOrdinalSuffix(day) {
+          if (day > 3 && day < 21) return "th";
+          switch (day % 10) {
+            case 1:
+              return "st";
+            case 2:
+              return "nd";
+            case 3:
+              return "rd";
+            default:
+              return "th";
+          }
+        }
+
+        const dayWithSuffix = day + getOrdinalSuffix(day);
+
+        return `${month} ${dayWithSuffix}, ${year}`;
+      }
+
+      function copyToClipboard(field) {
+        const output = document.getElementById(field);
+        const textarea = document.createElement("textarea");
+        textarea.value = output.textContent;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+
+      function countWordsIgnoringBrackets(text) {
+        // Remove text enclosed in square brackets and preceded by a number and a period.
+        const cleanedText = text.replace(/\[\d+\..*?\]/g, "");
+
+        // Match words in the cleaned text. Words are defined as sequences of alphanumeric characters.
+        const words = cleanedText.match(/\b\w+\b/g);
+
+        // Return the number of words, or 0 if there are no words.
+        return words ? words.length : 0;
+      }
+
+      function loadFormData() {
+        const savedData = localStorage.getItem("amg-form");
+        if (savedData) {
+          const formData = JSON.parse(savedData);
+          for (let key in formData) {
+            if (formData.hasOwnProperty(key)) {
+              const element = document.getElementById(key);
+              if (element) {
+                if (element.type === "radio") {
+                  element.checked = formData[key];
+                } else {
+                  element.value = formData[key];
+                }
+              }
+            }
+          }
+          updateOutput(); // Update output with loaded data
+        }
+      }
+
+      function clearForm() {
+        localStorage.removeItem("amg-form");
+        $("#inputForm")[0].reset();
+        updateOutput();
+      }
+    </script>
+  </body>
+</html>
