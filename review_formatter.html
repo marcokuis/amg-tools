@@ -122,6 +122,10 @@
             <input type="text" class="form-control" id="label" name="label" />
           </div>
           <div class="form-group">
+            <label for="labelsite">Label website</label>
+            <input type="text" class="form-control" id="labelsite" name="labelsite" />
+          </div>
+          <div class="form-group">
             <label for="bcembed">Bandcamp embed code</label>
             <textarea class="form-control" id="bcembed" name="bcembed" rows="4"></textarea>
           </div>
@@ -169,10 +173,6 @@
               <option value="~165 kbps VBR mp3">~165 kbps VBR mp3</option>
               <option value="">Other (set manually)</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="labelsite">Label website</label>
-            <input type="text" class="form-control" id="labelsite" name="labelsite" />
           </div>
           <div class="form-group">
             <label for="bandcamp">Bandcamp</label>
@@ -275,6 +275,7 @@
           const ytcode = inputs.youtube.split("?v=")[1];
           article += `<iframe class="aligncenter" src="https://www.youtube.com/embed/${ytcode}" width="500" height="285" frameborder="0" allowfullscreen="allowfullscreen"><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span></iframe>\n`;
         }
+	      article = article.replace(/[\u2018\u2019\u201C\u201D]/g, match => match === '‘' || match === '’' ? "'" : '"');
         article += "<hr />\n\n";
         const score = $("#numericScore")[0].checked ? `${inputs.score.split("_")[0]}/5.0` : inputs.score.split("_")[1];
         article += `<p style="text-align: center;"><strong>Rating:</strong> ${score}
@@ -428,7 +429,10 @@
 
       function countWordsIgnoringBrackets(text) {
         // Remove text enclosed in square brackets and preceded by a number and a period.
-        const cleanedText = text.replace(/\[\d+\..*?\]/g, "");
+        const cleanedText = text
+            .replace(/\[\d+\..*?\]/g, "")
+            .replace(/[\u2018\u2019\u201C\u201D]/g, match => match === '‘' || match === '’' ? "'" : '"')
+            .replace(/(?<=[a-zA-Z])'(?=[a-zA-Z])/g, "");
 
         // Match words in the cleaned text. Words are defined as sequences of alphanumeric characters.
         const words = cleanedText.match(/\b\w+\b/g);
